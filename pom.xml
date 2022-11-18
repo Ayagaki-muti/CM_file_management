@@ -26,6 +26,12 @@
   </properties>
 
   <dependencies>
+    <!-- chainmaker长安链依赖 -->
+    <dependency>
+      <groupId>org.chainmaker</groupId>
+      <artifactId>chainmaker-sdk-java</artifactId>
+      <version>2.2.0</version>
+    </dependency>
     <!-- springboot 依赖-->
     <dependency>
       <groupId>org.springframework.boot</groupId>

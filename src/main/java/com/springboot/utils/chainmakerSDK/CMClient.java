@@ -1,50 +1,37 @@
 package com.springboot.utils.chainmakerSDK;
 
-import com.springboot.utils.fabricSDK.UserContext;
-import org.hyperledger.fabric.sdk.Channel;
-import org.hyperledger.fabric.sdk.Orderer;
-import org.hyperledger.fabric.sdk.Peer;
-import org.hyperledger.fabric.sdk.TransactionRequest;
-import org.hyperledger.fabric.sdk.exception.*;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
+import org.chainmaker.pb.common.ContractOuterClass;
+import org.chainmaker.sdk.ChainClient;
+import org.chainmaker.sdk.Node;
+import org.chainmaker.sdk.User;
 public class CMClient {
 
     /**
      * 构造函数
-     * @param userContext
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws InvalidArgumentException
-     * @throws InstantiationException
-     * @throws NoSuchMethodException
-     * @throws CryptoException
-     * @throws ClassNotFoundException
+     * @param user
+     * @return
      */
-    public CMClient(UserContext userContext) throws IllegalAccessException, InvocationTargetException, InvalidArgumentException, InstantiationException, NoSuchMethodException, CryptoException, ClassNotFoundException {
+    public CMClient(User user){
+
+
     }
-
-
 
     /**
      * 创建channel
      * @param channelName channel的名字
-     * @param order order的信息
+     * @param node 节点
      * @param txPath 创建channel所需的tx文件
      * @return
-     * @throws IOException
-     * @throws InvalidArgumentException
-     * @throws TransactionException
      */
-    public Channel createCMChannel(String channelName, Orderer order, String txPath) throws IOException, InvalidArgumentException, TransactionException{
-
-        return null;
-    }
-
+//    public ChainClient createCMChannel(String channelName, Node node, String txPath) throws IOException, InvalidArgumentException, TransactionException{
+//
+//        return null;
+//    }
 
     /**
      * 安装合约底层代码
@@ -53,13 +40,14 @@ public class CMClient {
      * @param chaincodeVersion  合约版本
      * @param chaincodeLocation 合约的目录路径
      * @param chaincodePath     合约的文件夹
-     * @param peers             安装的peers 节点
+     * @param nodeList          安装的节点
+     * @return
      */
-    public Object installCMcode(TransactionRequest.Type lang, String chaincodeName, String chaincodeVersion, String chaincodeLocation, String chaincodePath, List<Peer> peers) throws InvalidArgumentException, ProposalException{
+    public Object installCMcode(ContractOuterClass.RuntimeType lang, String chaincodeName, String chaincodeVersion,
+                                String chaincodeLocation, String chaincodePath, List<Node> nodeList){
 
         return null;
     }
-
 
     /**
      * 初始化合约底层代码
@@ -67,87 +55,66 @@ public class CMClient {
      * @param lang  合约开发语言
      * @param chaincodeName 合约名称
      * @param chaincodeVersion 合约版本
-     * @param order order的信息
-     * @param peer  peer信息
+     * @param node node的信息
      * @param funcName 合约实例化执行的函数
      * @param args 合约实例化执行的参数
      * @return
-     * @throws TransactionException
-     * @throws ProposalException
-     * @throws InvalidArgumentException
      */
-    public Object initCMcode(String channelName, TransactionRequest.Type lang, String chaincodeName, String chaincodeVersion, Orderer order, Peer peer, String funcName, String[] args) throws TransactionException, ProposalException, InvalidArgumentException{
+    public Object initCMcode(String channelName, ContractOuterClass.RuntimeType lang, String chaincodeName, String chaincodeVersion,
+                             Node node, String funcName, String[] args) {
 
         return null;
     }
 
-
     /**
+     * 合约的升级底层代码
      * @param channelName channel名字
      * @param lang 合约开发语言
      * @param chaincodeName 合约名称
      * @param chaincodeVersion 合约版本
-     * @param order order的信息
-     * @param peer peer信息
+     * @param node 节点
      * @param funcName 合约实例化执行的函数
      * @param args  合约实例化执行的参数
-     * @throws TransactionException
-     * @throws ProposalException
-     * @throws InvalidArgumentException
-     * @throws IOException
-     * @throws ChaincodeEndorsementPolicyParseException
-     * @description 合约的升级底层代码
+     * @return
      */
-    public Object upgradeCMcode(String channelName, TransactionRequest.Type lang, String chaincodeName, String chaincodeVersion, Orderer order, Peer peer, String funcName, String[] args) throws TransactionException, ProposalException, InvalidArgumentException, IOException, ChaincodeEndorsementPolicyParseException{
+    public Object upgradeCMcode(String channelName, ContractOuterClass.RuntimeType lang, String chaincodeName,
+                                String chaincodeVersion, String funcName, Node node, String[] args) {
 
         return null;
     }
-
-
 
     /**
      * 执行合约底层代码
      * @param channelName channel名字
      * @param lang 合约开发语言
      * @param chaincodeName 合约名称
-     * @param order order的信息
-     * @param peers peer信息
+     * @param node 节点
+     * @param nodes
      * @param funcName 合约调用执行的函数名称
      * @param args 合约调用执行的参数
      * @return
-     * @throws TransactionException
-     * @throws ProposalException
-     * @throws InvalidArgumentException
      */
-    public Object invokeCMcode(String channelName, TransactionRequest.Type lang, String chaincodeName, Orderer order, List<Peer> peers, String funcName, String[] args) throws TransactionException, ProposalException, InvalidArgumentException{
+    public Object invokeCMcode(String channelName, ContractOuterClass.RuntimeType lang,
+                               String chaincodeName, Node node, List<Node> nodes, String funcName, String[] args){
 
         return null;
     }
 
-
-
-
     /**
      * 合约的查询底层代码
-     * @param peers peer信息
+     * @param node node信息
      * @param channelName channel名字
      * @param lang  合约开发语言
      * @param chaincodeName 合约名称
      * @param funcName 合约查询执行的函数名称
      * @param args 合约查询执行的参数
      * @return
-     * @throws TransactionException
-     * @throws InvalidArgumentException
-     * @throws ProposalException
      */
-    public Map queryCMcode(List<Peer> peers, String channelName, TransactionRequest.Type lang, String chaincodeName, String funcName, String[] args) throws TransactionException, InvalidArgumentException, ProposalException{
+    public Map queryCMcode(List<Node> node, String channelName, ContractOuterClass.RuntimeType lang,
+                           String chaincodeName, String funcName, String[] args) {
 
         return null;
     }
-
-
-
-
 
     /**
      * 获取order节点信息
@@ -155,16 +122,11 @@ public class CMClient {
      * @param grpcUrl
      * @param tlsFilePath
      * @return
-     * @throws InvalidArgumentException
      */
-    public Orderer getCMOrder(String name, String grpcUrl, String tlsFilePath) throws InvalidArgumentException{
+    public Node getCMOrder(String name, String grpcUrl, String tlsFilePath){
 
         return null;
     }
-
-
-
-
 
     /**
      * 获取peer节点
@@ -172,25 +134,19 @@ public class CMClient {
      * @param grpcUrl
      * @param tlsFilePath
      * @return
-     * @throws InvalidArgumentException
      */
-    public Peer getCMPeer(String name, String grpcUrl, String tlsFilePath) throws InvalidArgumentException{
+    public Node getCMNode(String name, String grpcUrl, String tlsFilePath){
 
         return null;
     }
 
 
-
-    //获取已有的channel
     /**
-     *
+     * 获取已有的channel
      * @param channelName
      * @return
-     * @throws InvalidArgumentException
-     * @throws TransactionException
-     * @throws ProposalException
      */
-    public Channel getChannel(String channelName) throws InvalidArgumentException, TransactionException, ProposalException{
+    public ChainClient getChainClient(String channelName){
 
         return null;
     }
