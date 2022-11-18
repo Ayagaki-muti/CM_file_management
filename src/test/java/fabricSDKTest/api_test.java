@@ -15,6 +15,7 @@ public class api_test {
         //测试安装合约
         String a = (String) FabricSDK.installChaincode("1.0.0", "src/main/resources/file/chaincode", "keyValue");
         System.out.print("end"+a);
+
         //测试实例化合约
         String b = (String) FabricSDK.instantiated("keyValue", "1.0.0");
         System.out.print("end"+b);
