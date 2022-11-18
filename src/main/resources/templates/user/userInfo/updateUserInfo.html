@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>后台管理</title>
+  <!-- 所有script封装到一起 -->
+  <div th:replace="user/common/scriptBarCommon :: script"  ></div>
+</head>
+<body id="page-top">
+<div id="wrapper" class="set-min-height">
+  <div th:replace="user/common/leftPageBar :: leftPage"  ></div>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- 页面开始 -->
+    <div id="content">
+      <div th:replace="user/common/headPageBar :: headPage"  ></div>
+      <!-- 页面内容开始 -->
+      <div class="container-fluid">
+        <div class="row">
+        <div class="container-fluid" style="width:60% ">
+            <div class="form-group">
+                <span> 用户ID： </span>
+                <input type="text" id="userId" readonly="readonly" th:value="${userInfo['userId']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 用户密码： </span>
+                <input type="text" id="userPassword" th:value="${userInfo['userPassword']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 用户名字： </span>
+                <input type="text" id="userName" th:value="${userInfo['userName']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 用户性别： </span>
+                <input type="text" id="userSex" th:value="${userInfo['userSex']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 用户地址： </span>
+                <input type="text" id="userAddress" th:value="${userInfo['userAddress']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 用户联系方式： </span>
+                <input type="text" id="userPhone" th:value="${userInfo['userPhone']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <p><input class="btn btn-primary btn-user btn-block" id="updateUserInfo" type="submit" value="确认更新"/></p>
+        </div>
+        </div>
+      </div>
+      <!-- 页面内容结束 -->
+
+    </div>
+    <!-- 页面结束 -->
+    <div th:replace="user/common/footerBar :: footer"  ></div>
+  </div>
+</div>
+<script type="text/javascript">
+    $("input[id='updateUserInfo']").click(function(){
+        $.post("./updateUserInfo",
+            {"userId":$("input[id='userId']").val(),
+                "userPassword":$("input[id='userPassword']").val(),
+                "userName":$("input[id='userName']").val(),
+                "userSex":$("input[id='userSex']").val(),
+                "userAddress":$("input[id='userAddress']").val(),
+                "userPhone":$("input[id='userPhone']").val()},
+            function(data){
+                alert(data['msg']);
+            })
+    });
+</script>
+</body>
+</html>

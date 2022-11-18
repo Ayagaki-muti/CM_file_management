@@ -1,0 +1,70 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>后台管理</title>
+  <!-- 所有script封装到一起 -->
+  <div th:replace="admin/common/scriptBarCommon :: script"  ></div>
+</head>
+<body id="page-top">
+<div id="wrapper" class="set-min-height">
+  <div th:replace="admin/common/leftPageBar :: leftPage"  ></div>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- 页面开始 -->
+    <div id="content">
+      <div th:replace="admin/common/headPageBar :: headPage"  ></div>
+      <!-- 页面内容开始 -->
+      <div class="container-fluid" style="width:60% ">
+          <div class="form-group">
+              <label for="adminPassword">超级管理员密码</label>
+              <input type="password" class="form-control" id="adminPassword" placeholder="请输入用户密码">
+          </div>
+          <div class="form-group">
+              <label for="adminName">超级管理员姓名</label>
+              <input type="text" class="form-control" id="adminName" placeholder="请输入真实姓名">
+          </div>
+          <div class="form-group">
+              <label for="adminSex">性别</label>
+              <input type="text" class="form-control" id="adminSex" placeholder="请输入性别">
+          </div>
+          <div class="form-group">
+              <label for="adminAddress">地址</label>
+              <input type="text" class="form-control" id="adminAddress" placeholder="请输入地址">
+          </div>
+          <div class="form-group">
+              <label for="adminPhone">联系方式</label>
+              <input type="text" class="form-control" id="adminPhone" placeholder="请输入联系方式">
+          </div>
+          <div class="form-group">
+              <label for="adminLevel">超级管理员级别</label>
+              <input type="text" class="form-control" id="adminLevel" placeholder="请输入超级管理员级别">
+          </div>
+          <div class="submit-bt">
+              <p><input name="insertAdminInfo" type="submit" value="注册" class="btn btn-primary btn-user btn-block"/></p>
+          </div>
+      </div>
+      <!-- 页面内容结束 -->
+
+    </div>
+    <!-- 页面结束 -->
+    <div th:replace="admin/common/footerBar :: footer"  ></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $("input[name='insertAdminInfo']").click(function(){
+        $.post("./insertAdminInfo",
+            {"adminPassword":$("input[id='adminPassword']").val(),
+                "adminName":$("input[id='adminName']").val(),
+                "adminSex":$("input[id='adminSex']").val(),
+                "adminAddress":$("input[id='adminAddress']").val(),
+                "adminPhone":$("input[id='adminPhone']").val(),
+                "adminLevel":$("input[id='adminLevel']").val()},
+            function(data){
+                alert(data['msg']+" 登录ID："+data['data']);
+            })
+    });
+</script>
+</body>
+</html>

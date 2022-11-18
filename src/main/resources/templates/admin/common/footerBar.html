@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<!-- th:fragment 定义需要引入的代码块，该div包含的内容即为引用的公共内容 -->
+<!-- html底部 -->
+<div th:fragment="footer">
+    <footer class="sticky-footer bg-white" style="height: 20px">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; 2021</span>
+            </div>
+        </div>
+        <!-- 将loading放在footer里 -->
+        <div id="loading" style="display: none" class="my-center">
+            <img src='../img/avatar/loading.gif' />
+        </div>
+    </footer>
+</div>
+</html>

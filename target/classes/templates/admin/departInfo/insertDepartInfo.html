@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>后台管理</title>
+  <!-- 所有script封装到一起 -->
+  <div th:replace="admin/common/scriptBarCommon :: script"  ></div>
+</head>
+<body id="page-top">
+<div id="wrapper" class="set-min-height">
+  <div th:replace="admin/common/leftPageBar :: leftPage"  ></div>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- 页面开始 -->
+    <div id="content">
+      <div th:replace="admin/common/headPageBar :: headPage"  ></div>
+      <!-- 页面内容开始 -->
+      <div class="container-fluid">
+        <div class="row">
+        <div class="container-fluid" style="width:60% ">
+            <div class="form-group">
+                <span> 部门名称： </span>
+                <input type="text" id="departName"  class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 上级部门： </span>
+                <input type="text" id="departSuperior"  class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <p><input class="btn btn-primary btn-user btn-block" id="insertDepartInfo" type="submit" value="上传部门信息"/></p>
+            </div>
+        </div>
+      </div>
+      <!-- 页面内容结束 -->
+    </div>
+    <!-- 页面结束 -->
+    <div th:replace="admin/common/footerBar :: footer"  ></div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $("input[id='insertDepartInfo']").click(function(){
+        var formData = new FormData();
+        // 添加表单信息到formData
+        formData.append("departName", $("input[id='departName']").val());
+        formData.append("departSuperior", $("input[id='departSuperior']").val());
+        $.ajax({
+            type: "POST",
+            url: "./insertDepartInfo",
+            dataType : "json",
+            processData: false,  // 注意：让jQuery不要处理数据
+            contentType: false,  // 注意：让jQuery不要设置contentType
+            data: formData,
+            success : function(data) {
+                alert(data['data']);
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
