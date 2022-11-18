@@ -157,7 +157,6 @@ public class FabricSDK {
     /**
      * invoke 合约
      * invoke(initArgsInvokeRecord,chaincodeName4);
-     *
      * @return Object
      */
     public boolean invoke(String[] initArgs) {

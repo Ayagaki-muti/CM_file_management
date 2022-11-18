@@ -35,6 +35,7 @@ public class api_test {
                                 "\"adminLevel\":\"" + "A" + "\"}"
                 };
         fabricSDK.invoke(initArgsInvoke);
+
         //测试查询合约
         String[] initArgsQuery = {"112"};
         fabricSDK.queryChaincode(initArgsQuery);
