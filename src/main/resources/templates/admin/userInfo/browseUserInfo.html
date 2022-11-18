@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>后台管理</title>
+  <!-- 所有script封装到一起 -->
+  <div th:replace="admin/common/scriptBarCommon :: script"  ></div>
+</head>
+<body id="page-top">
+<div id="wrapper" class="set-min-height">
+  <div th:replace="admin/common/leftPageBar :: leftPage"  ></div>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- 页面开始 -->
+    <div id="content">
+      <div th:replace="admin/common/headPageBar :: headPage"  ></div>
+      <!-- 页面内容开始 -->
+      <div class="container-fluid">
+        <div class="row">
+        <div class="container-fluid" style="width:60% ">
+            <div class="form-group">
+                <span> 用户ID： </span>
+                <input type="text" name="ADMIN_ID" readonly="readonly" th:value="${userInfo['userId']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 用户密码： </span>
+                <input type="text" readonly="readonly" th:value="${userInfo['userPassword']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 用户名字： </span>
+                <input type="text" name="ADMIN_NAME"  readonly="readonly" th:value="${userInfo['userName']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 用户性别： </span>
+                <input type="text" name="ADMIN_NAME"  readonly="readonly" th:value="${userInfo['userSex']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 用户地址： </span>
+                <input type="text" name="ADMIN_NAME"  readonly="readonly" th:value="${userInfo['userAddress']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 用户联系方式： </span>
+                <input type="text" name="ADMIN_NAME"  readonly="readonly" th:value="${userInfo['userPhone']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <p><a class="btn btn-primary btn-user btn-block" name="updateAdmin" th:href="@{'./updateUserInfo?userId='+${userInfo['userId']}}" >更新用户</a></p>
+        </div>
+        </div>
+      </div>
+      <!-- 页面内容结束 -->
+
+    </div>
+    <!-- 页面结束 -->
+    <div th:replace="admin/common/footerBar :: footer"  ></div>
+  </div>
+</div>
+</body>
+</html>

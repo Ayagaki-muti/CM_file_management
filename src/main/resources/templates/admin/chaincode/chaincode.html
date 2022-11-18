@@ -1,0 +1,94 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, userInfo-scalable=no">
+    <title>管理员管理链码</title>
+    <script src="/FileManage/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <link href="/FileManage/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .margin-left-right{
+            margin-top: 5%;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+        .submit-bt{
+            text-align: center;margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div role="form" class="margin-left-right">
+    <h1 style="text-align: center"> 操作链码 </h1>
+    <div class="form-group">
+        <label for="chaincodeName">链码名：adminInfo departInfo recordAdmin recordAuth recordInfo userInfo keyValue</label>
+        <input type="text" class="form-control" id="chaincodeName" placeholder="请输入链码名">
+    </div>
+    <div class="form-group">
+        <label for="chaincodeVersion">链码版本：</label>
+        <input type="text" class="form-control" id="chaincodeVersion" placeholder="请输入链码版本">
+    </div>
+    <div class="submit-bt">
+        <p><input name="uploadChaincode" type="submit" value="安装合约" class="btn btn-primary"/>
+        <input name="instantiatedChaincode" type="submit" value="实例化合约" class="btn btn-primary"/>
+        <input name="upgradeChaincode" type="submit" value="升级合约" class="btn btn-primary"/></p>
+    </div>
+    <!--<div class="submit-bt">
+        <br><br>
+        <h1 style="text-align: center"> 触发合约 </h1>
+        <p><a href="./adminRegisterView" type="submit" class="btn btn-primary">admin</a>
+            <a href="./adminRegisterView" type="submit" class="btn btn-primary">departInfo</a>
+            <a href="./adminRegisterView" type="submit" class="btn btn-primary">recordAdmin</a>
+            <a href="./adminRegisterView" type="submit" class="btn btn-primary">recordAuth</a>
+            <a href="./adminRegisterView" type="submit" class="btn btn-primary">recordInfo</a>
+            <a href="./adminRegisterView" type="submit" class="btn btn-primary">userInfo</a>
+            <a href="./adminRegisterView" type="submit" class="btn btn-primary">keyValue</a>
+        </p>
+    </div>
+    <div class="submit-bt">
+        <br><br>
+        <h1 style="text-align: center"> 查询合约 </h1>
+        <p><input name="adminInfoQuery" type="submit" value="admin" class="btn btn-primary"/>
+            <input name="departInfoQuery" type="submit" value="departInfo " class="btn btn-primary"/>
+            <input name="recordAdminQuery" type="submit" value="recordAdmin  " class="btn btn-primary"/>
+            <input name="recordAuthQuery" type="submit" value="recordAuth  " class="btn btn-primary"/>
+            <input name="recordInfoQuery" type="submit" value="recordInfo  " class="btn btn-primary"/>
+            <input name="userInfoQuery" type="submit" value="userInfo  " class="btn btn-primary"/>
+            <input name="keyValueQuery" type="submit" value="keyValue" class="btn btn-primary"/></p>
+    </div>-->
+</div>
+
+<script type="text/javascript">
+
+    $("input[name='uploadChaincode']").click(function(){
+        $.post("./uploadChaincode",
+            {"chaincodeName":$("input[id='chaincodeName']").val(),
+                "chaincodeVersion":$("input[id='chaincodeVersion']").val()},
+            function(data){
+                alert(data['msg']);
+            })
+    });
+
+    $("input[name='instantiatedChaincode']").click(function(){
+        $.post("./instantiatedChaincode",
+            {"chaincodeName":$("input[id='chaincodeName']").val(),
+                "chaincodeVersion":$("input[id='chaincodeVersion']").val()},
+            function(data){
+                alert(data['msg']);
+            })
+    });
+
+    $("input[name='upgradeChaincode']").click(function(){
+        $.post("./upgradeChaincode",
+            {"chaincodeName":$("input[id='chaincodeName']").val(),
+                "chaincodeVersion":$("input[id='chaincodeVersion']").val()},
+            function(data){
+                alert(data['msg']);
+            })
+    });
+
+</script>
+</body>
+
+</html>

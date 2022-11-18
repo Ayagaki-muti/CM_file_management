@@ -1,0 +1,44 @@
+server:
+  # 端口号
+  port: 8089
+  servlet:
+    context-path: /FileManage
+
+spring:
+  freemarker:
+    cache: false    #页面不加载缓存，修改即时生效
+  jackson:
+    #jackson相关配置 设置所有时间返回的规则
+    date-format: yyyy-MM-dd HH:mm:ss
+    #时区必须要设置
+    time-zone: GMT+8
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    cache: false
+    prefix: classpath:/templates/
+    servlet:
+      content-type: text/html
+    suffix: .html
+  #redis配置
+  redis:
+    #Redis数据库索引（默认为0）
+    database: 0
+    #Redis服务器地址
+    host: 192.168.72.132
+    jedis:
+      pool:
+        #连接池最大连接数（使用负值表示没有限制）
+        max-active: 50
+        #连接池中的最大空闲连接
+        max-idle: 20
+        #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: 3000
+        #连接池中的最小空闲连接
+        min-idle: 2
+    #Redis服务器连接端口
+    port: 6379
+    #连接超时时间（毫秒）
+    timeout: 5000
+    password: wei199997
+

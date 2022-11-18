@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>后台管理</title>
+  <!-- 所有script封装到一起 -->
+  <div th:replace="recordAdmin/common/scriptBarCommon :: script"  ></div>
+</head>
+<body id="page-top">
+<div id="wrapper" class="set-min-height">
+  <div th:replace="recordAdmin/common/leftPageBar :: leftPage"  ></div>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- 页面开始 -->
+    <div id="content">
+      <div th:replace="recordAdmin/common/headPageBar :: headPage"  ></div>
+      <!-- 页面内容开始 -->
+      <div class="container-fluid">
+        <div class="row">
+        <div class="container-fluid" style="width:60% ">
+            <div class="form-group">
+                <span> 档案授权ID： </span>
+                <input type="text" name="ADMIN_ID" readonly="readonly" th:value="${recordAuth['recordAuthId']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 授权档案的档案管理员： </span>
+                <input type="text" readonly="readonly" th:value="${recordAuth['recordAdminName']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 所属人ID： </span>
+                <input type="text" name="ADMIN_NAME"  readonly="readonly" th:value="${recordAuth['recordUserId']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 档案ID： </span>
+                <input type="text" name="ADMIN_NAME"  readonly="readonly" th:value="${recordAuth['recordId']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 档案授权时间： </span>
+                <input type="text" name="ADMIN_NAME"  readonly="readonly" th:value="${recordAuth['recordAuthTime']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 授权截止时间： </span>
+                <input type="text" name="ADMIN_NAME"  readonly="readonly" th:value="${recordAuth['recordAuthCutOffTime']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <span> 授权备注： </span>
+                <input type="text" name="ADMIN_NAME"  readonly="readonly" th:value="${recordAuth['recordAuthTips']}" class="form-control form-control-user" aria-describedby="emailHelp">
+            </div>
+            <p><a class="btn btn-primary btn-user btn-block" name="updateAdmin" th:href="@{'./updateRecordAuth?recordId='+${recordAuth['recordAuthId']}}" >更新档案</a></p>
+        </div>
+        </div>
+      </div>
+      <!-- 页面内容结束 -->
+
+    </div>
+    <!-- 页面结束 -->
+    <div th:replace="recordAdmin/common/footerBar :: footer"  ></div>
+  </div>
+</div>
+</body>
+</html>
