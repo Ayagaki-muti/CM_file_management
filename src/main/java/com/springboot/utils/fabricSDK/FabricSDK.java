@@ -34,7 +34,11 @@ public class FabricSDK {
     }
 
     /**
-     * 安装chaincode
+     * 安装合约
+     * @param chaincodeVersion 合约版本
+     * @param chaincodeLocation
+     * @param chaincodeName
+     * @return
      */
     public static Object installChaincode(String chaincodeVersion, String chaincodeLocation, String chaincodeName) {
         String installOrg1 = SdkInitOrg1.install(chaincodeVersion, chaincodeLocation, chaincodeName).toString();

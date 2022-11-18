@@ -14,14 +14,24 @@ import java.util.Map;
 
 public class CMClient {
 
-    //userContext 环境变量
+    /**
+     * 构造函数
+     * @param userContext
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws InvalidArgumentException
+     * @throws InstantiationException
+     * @throws NoSuchMethodException
+     * @throws CryptoException
+     * @throws ClassNotFoundException
+     */
     public CMClient(UserContext userContext) throws IllegalAccessException, InvocationTargetException, InvalidArgumentException, InstantiationException, NoSuchMethodException, CryptoException, ClassNotFoundException {
     }
 
 
-    //创建channel
+
     /**
-     *
+     * 创建channel
      * @param channelName channel的名字
      * @param order order的信息
      * @param txPath 创建channel所需的tx文件
@@ -35,8 +45,9 @@ public class CMClient {
         return null;
     }
 
-    //安装合约底层代码
+
     /**
+     * 安装合约底层代码
      * @param lang              合约开发语言
      * @param chaincodeName     合约名称
      * @param chaincodeVersion  合约版本
@@ -49,9 +60,9 @@ public class CMClient {
         return null;
     }
 
-    //初始化合约底层代码
+
     /**
-     *
+     * 初始化合约底层代码
      * @param channelName channel名字
      * @param lang  合约开发语言
      * @param chaincodeName 合约名称
@@ -93,9 +104,9 @@ public class CMClient {
     }
 
 
-    //执行合约底层代码
+
     /**
-     *
+     * 执行合约底层代码
      * @param channelName channel名字
      * @param lang 合约开发语言
      * @param chaincodeName 合约名称
@@ -115,9 +126,9 @@ public class CMClient {
 
 
 
-    //合约的查询底层代码
+
     /**
-     *
+     * 合约的查询底层代码
      * @param peers peer信息
      * @param channelName channel名字
      * @param lang  合约开发语言
@@ -137,16 +148,16 @@ public class CMClient {
 
 
 
-    //创建orderer节点
+
     /**
-     *
+     * 获取order节点信息
      * @param name
      * @param grpcUrl
      * @param tlsFilePath
      * @return
      * @throws InvalidArgumentException
      */
-    public Orderer getCMOrderer(String name, String grpcUrl, String tlsFilePath) throws InvalidArgumentException{
+    public Orderer getCMOrder(String name, String grpcUrl, String tlsFilePath) throws InvalidArgumentException{
 
         return null;
     }
@@ -154,9 +165,9 @@ public class CMClient {
 
 
 
-    //获取peer节点
+
     /**
-     *
+     * 获取peer节点
      * @param name
      * @param grpcUrl
      * @param tlsFilePath
