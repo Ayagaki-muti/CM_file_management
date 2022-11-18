@@ -9,7 +9,7 @@ import static chainmaker.sdk.demo.InitClient.inItChainClient;
 public class DemoApplication  {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(DemoApplication.class, args);
+        //SpringApplication.run(DemoApplication.class, args);
         inItChainClient();
         //查询链配置
         ChainConfig.getChainConfig(InitClient.chainClient);
