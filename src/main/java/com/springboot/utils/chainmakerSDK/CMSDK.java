@@ -19,7 +19,13 @@ public class CMSDK {
      * @return
      */
     public static Object installChaincode(String chaincodeVersion, String chaincodeLocation, String chaincodeName){
+        try {
 
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return e.toString();
+        }
         return null;
     }
 
@@ -30,7 +36,13 @@ public class CMSDK {
      * @return
      */
     public static Object instantiated(String chaincodeName, String chaincodeVersion) {
+        try {
 
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return e.toString();
+        }
         return null;
     }
 
@@ -42,7 +54,13 @@ public class CMSDK {
      * @return
      */
     public static Object upgradeChaincode(String chaincodeName, String chaincodeVersion) {
+        try {
 
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return e.toString();
+        }
         return null;
     }
 
@@ -53,7 +71,13 @@ public class CMSDK {
      * @return
      */
     public boolean invoke(String[] initArgs) {
+        try {
 
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
         return false;
     }
 
@@ -65,9 +89,15 @@ public class CMSDK {
      * @return
      */
     public Collection queryChaincode(String[] initArgs) {
+        try {
 
-        Map map = null;
-        return map.values();
+
+            Map map = null;
+            return map.values();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -77,9 +107,15 @@ public class CMSDK {
      * @return
      */
     public Collection queryAllChaincode(String[] initArgs){
+        try {
 
-        Map map = null;
-        return map.values();
+
+            Map map = null;
+            return map.values();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
