@@ -4,13 +4,13 @@ chain_client:
   # 组织ID
   org_id: "TestCMorg1"
   # 客户端用户私钥路径
-  user_key_file_path: "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg1/user/admin1/示例测试用户1.tls.key"
+  user_key_file_path: "src/main/resources/crypto-config/TestCMorg1/user/admin1/示例测试用户1.tls.key"
   # 客户端用户证书路径
-  user_crt_file_path: "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg1/user/admin1/示例测试用户1.tls.crt"
+  user_crt_file_path: "src/main/resources/crypto-config/TestCMorg1/user/admin1/示例测试用户1.tls.crt"
   # 客户端用户交易签名私钥路径(若未设置，将使用user_key_file_path)
-  user_sign_key_file_path: "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg1/user/admin1/示例测试用户1.sign.key"
+  user_sign_key_file_path: "src/main/resources/crypto-config/TestCMorg1/user/admin1/示例测试用户1.sign.key"
   # 客户端用户交易签名证书路径(若未设置，将使用user_crt_file_path)
-  user_sign_crt_file_path: "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg1/user/admin1/示例测试用户1.sign.crt"
+  user_sign_crt_file_path: "src/main/resources/crypto-config/TestCMorg1/user/admin1/示例测试用户1.sign.crt"
 
   retry_limit: 10
   # 同步交易结果模式下，每次轮训交易结果时的等待时间，单位：ms 删除此项或设为<=0则使用默认值 500
@@ -27,10 +27,10 @@ chain_client:
       enable_tls: true
       # 信任证书池路径
       trust_root_paths:
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg1/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg2/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg3/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg4/ca"
+        - "src/main/resources/crypto-config/TestCMorg1/ca"
+        - "src/main/resources/crypto-config/TestCMorg2/ca"
+        - "src/main/resources/crypto-config/TestCMorg3/ca"
+        - "src/main/resources/crypto-config/TestCMorg4/ca"
       # TLS hostname
       tls_host_name: "chainmaker.org"
     - # 节点地址，格式为：IP:端口:连接数
@@ -41,10 +41,10 @@ chain_client:
       enable_tls: true
       # 信任证书池路径
       trust_root_paths:
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg1/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg2/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg3/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg4/ca"
+        - "src/main/resources/crypto-config/TestCMorg1/ca"
+        - "src/main/resources/crypto-config/TestCMorg2/ca"
+        - "src/main/resources/crypto-config/TestCMorg3/ca"
+        - "src/main/resources/crypto-config/TestCMorg4/ca"
       # TLS hostname
       tls_host_name: "chainmaker.org"
     - # 节点地址，格式为：IP:端口:连接数
@@ -55,10 +55,10 @@ chain_client:
       enable_tls: true
       # 信任证书池路径
       trust_root_paths:
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg1/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg2/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg3/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg4/ca"
+        - "src/main/resources/crypto-config/TestCMorg1/ca"
+        - "src/main/resources/crypto-config/TestCMorg2/ca"
+        - "src/main/resources/crypto-config/TestCMorg3/ca"
+        - "src/main/resources/crypto-config/TestCMorg4/ca"
       # TLS hostname
       tls_host_name: "chainmaker.org"
     - # 节点地址，格式为：IP:端口:连接数
@@ -69,10 +69,10 @@ chain_client:
       enable_tls: true
       # 信任证书池路径
       trust_root_paths:
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg1/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg2/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg3/ca"
-        - "/Users/sunshuo/Downloads/sdk-java-demo-v2.2.0/src/main/resources/crypto-config/TestCMorg4/ca"
+        - "src/main/resources/crypto-config/TestCMorg1/ca"
+        - "src/main/resources/crypto-config/TestCMorg2/ca"
+        - "src/main/resources/crypto-config/TestCMorg3/ca"
+        - "src/main/resources/crypto-config/TestCMorg4/ca"
       # TLS hostname
       tls_host_name: "chainmaker.org"
   archive:
