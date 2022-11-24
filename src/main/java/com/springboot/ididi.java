@@ -44,7 +44,7 @@ public class ididi {
     static final String ORG_ID3 = "TestCMorg3";
     static final String ORG_ID4 = "TestCMorg4";
 
-    static String SDK_CONFIG = "sdk_config.yml";
+    static String SDK_CONFIG = "crypto-config/sdk_config.yml";
 
     static ChainClient chainClient;
     static ChainManager chainManager;

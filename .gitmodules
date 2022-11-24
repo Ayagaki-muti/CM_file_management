@@ -1,0 +1,3 @@
+[submodule "src/main/resources/crypto-config"]
+	path = src/main/resources/crypto-config
+	url = git@github.com:Ayagaki-muti/CM_crypto_config.git
