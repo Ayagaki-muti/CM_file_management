@@ -18,7 +18,7 @@ public class CMSDK {
      * @param chaincodeName 合约名称
      * @return
      */
-    public static Object installCMChaincode(String chaincodeVersion, String chaincodeLocation, String chaincodeName){
+    public static Object installChaincode(String chaincodeVersion, String chaincodeLocation, String chaincodeName){
 
         return null;
     }
