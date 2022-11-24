@@ -1,15 +1,15 @@
 package com.springboot.utils.chainmakerSDK;
 
 import java.util.Collection;
+import java.util.Map;
 
 public class CMSDK {
 
-    private String CMCodeName; //智能合约名字
+    private String chainCodeName; //智能合约名字
 
-    public CMSDK(String CMCodeName) {
-        this.CMCodeName = CMCodeName;
+    public CMSDK(String chainCodeName) {
+        this.chainCodeName = chainCodeName;
     }
-
 
     /**
      * 安装智能合约
@@ -18,11 +18,10 @@ public class CMSDK {
      * @param chaincodeName 合约名称
      * @return
      */
-    public static Object installCMcode(String chaincodeVersion, String chaincodeLocation, String chaincodeName){
+    public static Object installCMChaincode(String chaincodeVersion, String chaincodeLocation, String chaincodeName){
 
         return null;
     }
-
 
     /**
      * 合约实例化
@@ -30,7 +29,7 @@ public class CMSDK {
      * @param chaincodeVersion 合约版本
      * @return
      */
-    public static Object CMinstantiated(String chaincodeName, String chaincodeVersion) {
+    public static Object instantiated(String chaincodeName, String chaincodeVersion) {
 
         return null;
     }
@@ -42,7 +41,7 @@ public class CMSDK {
      * @param chaincodeVersion 合约版本
      * @return
      */
-    public static Object upgradeCMcode(String chaincodeName, String chaincodeVersion) {
+    public static Object upgradeChaincode(String chaincodeName, String chaincodeVersion) {
 
         return null;
     }
@@ -53,7 +52,7 @@ public class CMSDK {
      * @param initArgs 传参
      * @return
      */
-    public boolean CMinvoke(String[] initArgs) {
+    public boolean invoke(String[] initArgs) {
 
         return false;
     }
@@ -61,13 +60,14 @@ public class CMSDK {
 
 
     /**
-     * 合约查询
+     * 合约查询（最新）
      * @param initArgs 传参
      * @return
      */
-    public Collection queryCMcode(String[] initArgs) {
+    public Collection queryChaincode(String[] initArgs) {
 
-        return null;
+        Map map = null;
+        return map.values();
     }
 
 
@@ -76,9 +76,10 @@ public class CMSDK {
      * @param initArgs 传参
      * @return
      */
-    public Collection queryAllCMcode(String[] initArgs){
+    public Collection queryAllChaincode(String[] initArgs){
 
-        return null;
+        Map map = null;
+        return map.values();
     }
 
 }
