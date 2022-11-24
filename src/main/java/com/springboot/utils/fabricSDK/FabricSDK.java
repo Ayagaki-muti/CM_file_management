@@ -63,31 +63,7 @@ public class FabricSDK {
             Orderer order = fabricClient.getOrderer("orderer.example.com", "grpcs://orderer.example.com:7050", tlsOrderFilePath);
             String[] initArgs = {""};
             return fabricClient.initChaincode("mychannel", TransactionRequest.Type.GO_LANG, chaincodeName, chaincodeVersion, order, peer, "init", initArgs);
-        } catch (NoSuchMethodException e) {
-            return e.toString();
-        } catch (NoSuchAlgorithmException e) {
-            return e.toString();
-        } catch (InstantiationException e) {
-            return e.toString();
-        } catch (CryptoException e) {
-            return e.toString();
-        } catch (ClassNotFoundException e) {
-            return e.toString();
-        } catch (InvalidArgumentException e) {
-            return e.toString();
-        } catch (InvalidKeySpecException e) {
-            return e.toString();
-        } catch (org.bouncycastle.crypto.CryptoException e) {
-            return e.toString();
-        } catch (IllegalAccessException e) {
-            return e.toString();
-        } catch (ProposalException e) {
-            return e.toString();
-        } catch (InvocationTargetException e) {
-            return e.toString();
-        } catch (IOException e) {
-            return e.toString();
-        } catch (TransactionException e) {
+        } catch (Exception e) {
             return e.toString();
         }
     }
@@ -109,46 +85,7 @@ public class FabricSDK {
             Orderer order = fabricClient.getOrderer("orderer.example.com", "grpcs://orderer.example.com:7050", tlsOrderFilePath);
             String[] initArgs = {""};
             return fabricClient.upgradeChaincode("mychannel", TransactionRequest.Type.GO_LANG, chaincodeName, chaincodeVersion, order, peer, "init", initArgs);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (CryptoException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (InvalidArgumentException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (org.bouncycastle.crypto.CryptoException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (ProposalException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (TransactionException e) {
-            e.printStackTrace();
-            return e.toString();
-        } catch (ChaincodeEndorsementPolicyParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return e.toString();
         }
@@ -178,43 +115,7 @@ public class FabricSDK {
             Orderer order = null;
             order = fabricClient.getOrderer("orderer.example.com", "grpcs://orderer.example.com:7050", tlsOrderFilePath);
             fabricClient.invoke("mychannel", TransactionRequest.Type.GO_LANG, chainCodeName, order, peers, "save", initArgs);
-        } catch (InvalidArgumentException e) {
-            e.printStackTrace();
-            return false;
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            return false;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return false;
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-            return false;
-        } catch (CryptoException e) {
-            e.printStackTrace();
-            return false;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-            return false;
-        } catch (org.bouncycastle.crypto.CryptoException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return false;
-        } catch (ProposalException e) {
-            e.printStackTrace();
-            return false;
-        } catch (TransactionException e) {
-            e.printStackTrace();
-            return false;
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
+        } catch (Exception e){
             e.printStackTrace();
             return false;
         }
@@ -244,31 +145,7 @@ public class FabricSDK {
             peers.add(peer1);
             Map map = fabricClient.queryChaincode(peers, "mychannel", TransactionRequest.Type.GO_LANG, chainCodeName, "query", initArgs);
             return map.values();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (org.bouncycastle.crypto.CryptoException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (CryptoException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InvalidArgumentException e) {
-            e.printStackTrace();
-        } catch (ProposalException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (TransactionException e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
         return null;
@@ -298,31 +175,7 @@ public class FabricSDK {
             peers.add(peer1);
             Map map = fabricClient.queryChaincode(peers, "mychannel", TransactionRequest.Type.GO_LANG, chainCodeName, "queryHistory", initArgs);
             return map.values();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (org.bouncycastle.crypto.CryptoException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (CryptoException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InvalidArgumentException e) {
-            e.printStackTrace();
-        } catch (ProposalException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (TransactionException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
