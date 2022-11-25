@@ -174,7 +174,7 @@ public class CMSDK {
     }
 
     /**
-     * 合约查询（最新）
+     * 调用某个合约里的《查询最新》方法
      * @param initArgs 传参
      * @return
      */
@@ -191,7 +191,7 @@ public class CMSDK {
     }
 
     /**
-     * 查询所有合约
+     * 调用某个合约中的《查询全部》方法
      * @param initArgs 传参
      * @return
      */
