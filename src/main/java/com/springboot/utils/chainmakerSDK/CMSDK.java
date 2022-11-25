@@ -12,26 +12,24 @@ import org.chainmaker.sdk.config.SdkConfig;
 import org.chainmaker.sdk.utils.FileUtils;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
 import static com.springboot.utils.chainmakerSDK.StaticConfig.*;
 
 public class CMSDK {
-    private String chainCodeName; //智能合约名字
-    private static final String CONTRACT_NAME = "mychannel";
+    private String contractName; //智能合约名字
 
     static ChainClient chainClient;
     static ChainManager chainManager;
 
     /**
      * 初始化长安链
-     * @param chainCodeName 智能合约名称
+     * @param contractName 智能合约名称
      */
-    public CMSDK(String chainCodeName) {
+    public CMSDK(String contractName) {
         try {
-            this.chainCodeName = chainCodeName;
+            this.contractName = contractName;
             SdkConfig sdkConfig;
             if(adminUser1 == null){
                 adminUser1 = new User(ORG_ID1, FileUtils.getResourceFileBytes(ADMIN1_KEY_PATH),
@@ -100,15 +98,15 @@ public class CMSDK {
      * 安装智能合约
      * @param chaincodeVersion 合约版本
      * @param chaincodeLocation 合约位置
-     * @param chaincodeName 合约名称
+     * @param contractName 合约名称
      * @return
      */
-    public static Object installChaincode(String chaincodeVersion, String chaincodeLocation, String chaincodeName){
+    public static Object installChaincode(String chaincodeVersion, String chaincodeLocation, String contractName){
         try {
             //可以通过运行起来，grep来过滤
-            System.out.println("CM_Terminal_log:"+chaincodeLocation+"/"+chaincodeName);
-            byte[] byteCode = FileUtils.getResourceFileBytes(chaincodeLocation+'/'+chaincodeName);
-            Request.Payload payload = chainClient.createContractCreatePayload(chaincodeName, "1", byteCode,
+            System.out.println("CM_Terminal_log:"+chaincodeLocation+"/"+contractName);
+            byte[] byteCode = FileUtils.getResourceFileBytes(chaincodeLocation+'/'+contractName);
+            Request.Payload payload = chainClient.createContractCreatePayload(contractName, "1", byteCode,
                     ContractOuterClass.RuntimeType.DOCKER_GO, null);
 
         }catch (Exception e){
@@ -120,11 +118,11 @@ public class CMSDK {
 
     /**
      * 合约实例化
-     * @param chaincodeName 合约名字
+     * @param contractName 合约名字
      * @param chaincodeVersion 合约版本
      * @return
      */
-    public static Object instantiated(String chaincodeName, String chaincodeVersion) {
+    public static Object instantiated(String contractName, String chaincodeVersion) {
         try {
 
 
@@ -137,11 +135,11 @@ public class CMSDK {
 
     /**
      * 合约升级
-     * @param chaincodeName 合约名字
+     * @param contractName 合约名字
      * @param chaincodeVersion 合约版本
      * @return
      */
-    public static Object upgradeChaincode(String chaincodeName, String chaincodeVersion) {
+    public static Object upgradeChaincode(String contractName, String chaincodeVersion) {
         try {
 
 
@@ -161,10 +159,10 @@ public class CMSDK {
         try {
             Map<String,byte[]> param = new HashMap<>();
             for (String i :initArgs){
-                param.put("",i.getBytes());     //TODO:不知道参数写啥
+                param.put("",i.getBytes());         //TODO:不知道参数写啥
             }
             ResultOuterClass.TxResponse responseInfo = null;
-            responseInfo = chainClient.invokeContract(CONTRACT_NAME,"save" ,
+            responseInfo = chainClient.invokeContract(contractName,"save" ,
                     null, param,10000, 10000);
             System.out.println("CM_Terminal_log:"+responseInfo);
 

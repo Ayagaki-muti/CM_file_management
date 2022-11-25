@@ -51,7 +51,6 @@ public class ididi {
     static User adminUser1;
     static User adminUser2;
     static User adminUser3;
-
     static User adminUser4;
 
     public static void main(String[] args) throws Exception{
