@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.springboot.dao.daoInterface.InsertToRedisHistory;
 import com.springboot.dao.daoInterface.JoinBeans;
 import com.springboot.entity.KeyValue;
-import com.springboot.utils.fabricSDK.FabricSDK;
+import com.springboot.utils.chainmakerSDK.CMSDK;
 import com.springboot.utils.myLog.Slf4j;
 import com.springboot.utils.myMap.MapUntils;
 import com.springboot.utils.myRedis.RedisUtils;
@@ -42,10 +42,10 @@ public class KeyValueDao implements JoinBeans, InsertToRedisHistory {
             // 添加向区块链请求的信息
             String[] initArgsQuery = {key};
             // 创建fabricSDK对象
-            FabricSDK fabricSDK = new FabricSDK("keyValue");
+            CMSDK cmSDK = new CMSDK("keyValue");
             try {
                 // 开始查询
-                Collection collection = fabricSDK.queryAllChaincode(initArgsQuery);
+                Collection collection = cmSDK.queryAllChaincode(initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = collection.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -81,7 +81,7 @@ public class KeyValueDao implements JoinBeans, InsertToRedisHistory {
      */
     public boolean insertKeyIndex(KeyValue keyValue) {
         Slf4j.logger.info("Dao:添加KeyIndex信息" + keyValue.toString());
-        FabricSDK fabricSDK = new FabricSDK("keyValue");
+        CMSDK cmSDK = new CMSDK("keyValue");
         String[] initArgsInvoke =
                 {keyValue.getKey(),
                         "{\"Key\":\"" + keyValue.getKey() + "\"," +
@@ -98,7 +98,7 @@ public class KeyValueDao implements JoinBeans, InsertToRedisHistory {
                 e.printStackTrace();
             }
         }).start();
-        return fabricSDK.invoke(initArgsInvoke);
+        return cmSDK.invoke(initArgsInvoke);
     }
 
     /**

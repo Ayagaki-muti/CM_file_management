@@ -7,7 +7,7 @@ import com.springboot.dao.daoInterface.JoinBeans;
 import com.springboot.dao.daoInterface.UpdateRedisChainCode;
 import com.springboot.entity.KeyValue;
 import com.springboot.entity.RecordAuth;
-import com.springboot.utils.fabricSDK.FabricSDK;
+import com.springboot.utils.chainmakerSDK.CMSDK;
 import com.springboot.utils.myLog.Slf4j;
 import com.springboot.utils.myMap.MapUntils;
 import com.springboot.utils.myRedis.RedisUtils;
@@ -56,10 +56,10 @@ public class RecordAuthDao implements JoinBeans, InsertToRedisHistory, UpdateRed
             // 添加向区块链请求的信息
             String[] initArgsQuery = {recordAuthId};
             // 创建fabricSDK对象
-            FabricSDK fabricSDK = new FabricSDK("recordAuth");
+            CMSDK cmSDK = new CMSDK("recordAuth");
             try {
                 // 开始查询
-                Collection result = fabricSDK.queryChaincode(initArgsQuery);
+                Collection result = cmSDK.queryChaincode(initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = result.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -102,10 +102,10 @@ public class RecordAuthDao implements JoinBeans, InsertToRedisHistory, UpdateRed
             // 添加向区块链请求的信息
             String[] initArgsQuery = {recordAuthId};
             // 创建fabricSDK对象
-            FabricSDK fabricSDK = new FabricSDK("recordAuth");
+            CMSDK cmSDK = new CMSDK("recordAuth");
             try {
                 // 开始查询
-                Collection collection = fabricSDK.queryAllChaincode(initArgsQuery);
+                Collection collection = cmSDK.queryAllChaincode(initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = collection.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -145,7 +145,7 @@ public class RecordAuthDao implements JoinBeans, InsertToRedisHistory, UpdateRed
      */
     public boolean insertRecordAuth(RecordAuth recordAuth) {
         Slf4j.logger.info("Dao:添加RecordAuth：" + recordAuth.toString());
-        FabricSDK fabricSDK = new FabricSDK("recordAuth");
+        CMSDK cmSDK = new CMSDK("recordAuth");
         String[] initArgsInvoke =
                 {recordAuth.getRecordAuthId(),
                         "{\"recordAuthId\":\"" + recordAuth.getRecordAuthId() + "\"," +
@@ -179,7 +179,7 @@ public class RecordAuthDao implements JoinBeans, InsertToRedisHistory, UpdateRed
                 e.printStackTrace();
             }
         }).start();
-        return fabricSDK.invoke(initArgsInvoke);
+        return cmSDK.invoke(initArgsInvoke);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.springboot.controller.publicController;
 
-import com.springboot.utils.fabricSDK.FabricSDK;
+import com.springboot.utils.chainmakerSDK.CMSDK;
 import com.springboot.utils.myHttpResult.HttpResult;
 import com.springboot.utils.myLog.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class UploadChaincodeController {
     public Object uploadChaincode(@RequestParam("chaincodeName") String chaincodeName,
                                   @RequestParam("chaincodeVersion") String chaincodeVersion) {
         Slf4j.logger.info("安装链码:" + chaincodeName);
-        return new HttpResult(FabricSDK.installChaincode(chaincodeVersion, chaincodeLocation, chaincodeName).toString(), 200);
+        return new HttpResult(CMSDK.installChaincode(chaincodeVersion, chaincodeLocation, chaincodeName).toString(), 200);
     }
 
     /**
@@ -37,7 +37,7 @@ public class UploadChaincodeController {
     public Object instantiatedChaincode(@RequestParam("chaincodeName") String chaincodeName,
                                         @RequestParam("chaincodeVersion") String chaincodeVersion) {
         Slf4j.logger.info("实例化链码:" + chaincodeName);
-        return new HttpResult(FabricSDK.instantiated(chaincodeName, chaincodeVersion).toString(), 200);
+        return new HttpResult(CMSDK.instantiated(chaincodeName, chaincodeVersion).toString(), 200);
     }
 
     /**
@@ -48,7 +48,7 @@ public class UploadChaincodeController {
     public Object upgradeChaincode(@RequestParam("chaincodeName") String chaincodeName,
                                    @RequestParam("chaincodeVersion") String chaincodeVersion) {
         Slf4j.logger.info("升级链码:" + chaincodeName);
-        return new HttpResult(FabricSDK.upgradeChaincode(chaincodeName, chaincodeVersion).toString(), 200);
+        return new HttpResult(CMSDK.upgradeChaincode(chaincodeName, chaincodeVersion).toString(), 200);
     }
 
 }

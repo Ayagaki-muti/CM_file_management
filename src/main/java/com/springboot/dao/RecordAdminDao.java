@@ -5,7 +5,7 @@ import com.springboot.dao.daoInterface.JoinBeans;
 import com.springboot.dao.daoInterface.UpdateRedisChainCode;
 import com.springboot.entity.KeyValue;
 import com.springboot.entity.RecordAdmin;
-import com.springboot.utils.fabricSDK.FabricSDK;
+import com.springboot.utils.chainmakerSDK.CMSDK;
 import com.springboot.utils.myLog.Slf4j;
 import com.springboot.utils.myMap.MapUntils;
 import com.springboot.utils.myRedis.RedisUtils;
@@ -53,10 +53,10 @@ public class RecordAdminDao implements JoinBeans, UpdateRedisChainCode {
             // 添加向区块链请求的信息
             String[] initArgsQuery = {recordAdminId};
             // 创建fabricSDK对象
-            FabricSDK fabricSDK = new FabricSDK("recordAdmin");
+            CMSDK cmSDK = new CMSDK("recordAdmin");
             try {
                 // 开始查询
-                Collection result = fabricSDK.queryChaincode(initArgsQuery);
+                Collection result = cmSDK.queryChaincode(initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = result.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -87,7 +87,7 @@ public class RecordAdminDao implements JoinBeans, UpdateRedisChainCode {
      */
     public boolean insertRecordAdmin(RecordAdmin recordAdmin) {
         Slf4j.logger.info("Dao:添加RecordInfo" + recordAdmin.toString());
-        FabricSDK fabricSDK = new FabricSDK("recordAdmin");
+        CMSDK cmSDK = new CMSDK("recordAdmin");
         String[] initArgsInvoke =
                 {recordAdmin.getRecordAdminId(),
                         "{\"recordAdminId\":\"" + recordAdmin.getRecordAdminId() + "\"," +
@@ -116,7 +116,7 @@ public class RecordAdminDao implements JoinBeans, UpdateRedisChainCode {
             }
             updateRedisChainCode(recordAdmin);
         }).start();
-        return fabricSDK.invoke(initArgsInvoke);
+        return cmSDK.invoke(initArgsInvoke);
     }
 
     @Override
