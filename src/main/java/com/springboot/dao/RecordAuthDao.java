@@ -56,10 +56,10 @@ public class RecordAuthDao implements JoinBeans, InsertToRedisHistory, UpdateRed
             // 添加向区块链请求的信息
             String[] initArgsQuery = {recordAuthId};
             // 创建fabricSDK对象
-            CMSDK cmSDK = new CMSDK("recordAuth");
+            CMSDK cmSDK = new CMSDK();
             try {
                 // 开始查询
-                Collection result = cmSDK.queryChaincode(initArgsQuery);
+                Collection result = cmSDK.queryChaincode("recordAuth",initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = result.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -102,10 +102,10 @@ public class RecordAuthDao implements JoinBeans, InsertToRedisHistory, UpdateRed
             // 添加向区块链请求的信息
             String[] initArgsQuery = {recordAuthId};
             // 创建fabricSDK对象
-            CMSDK cmSDK = new CMSDK("recordAuth");
+            CMSDK cmSDK = new CMSDK();
             try {
                 // 开始查询
-                Collection collection = cmSDK.queryAllChaincode(initArgsQuery);
+                Collection collection = cmSDK.queryAllChaincode("recordAuth",initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = collection.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -145,7 +145,7 @@ public class RecordAuthDao implements JoinBeans, InsertToRedisHistory, UpdateRed
      */
     public boolean insertRecordAuth(RecordAuth recordAuth) {
         Slf4j.logger.info("Dao:添加RecordAuth：" + recordAuth.toString());
-        CMSDK cmSDK = new CMSDK("recordAuth");
+        CMSDK cmSDK = new CMSDK();
         String[] initArgsInvoke =
                 {recordAuth.getRecordAuthId(),
                         "{\"recordAuthId\":\"" + recordAuth.getRecordAuthId() + "\"," +
@@ -179,7 +179,7 @@ public class RecordAuthDao implements JoinBeans, InsertToRedisHistory, UpdateRed
                 e.printStackTrace();
             }
         }).start();
-        return cmSDK.invoke(initArgsInvoke);
+        return cmSDK.invoke("recordAuth",initArgsInvoke);
     }
 
     @Override

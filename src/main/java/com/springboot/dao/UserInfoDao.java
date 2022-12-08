@@ -52,10 +52,10 @@ public class UserInfoDao implements JoinBeans, UpdateRedisChainCode {
             // 添加向区块链请求的信息
             String[] initArgsQuery = {userId};
             // 创建fabricSDK对象
-            CMSDK cmSDK = new CMSDK("userInfo");
+            CMSDK cmSDK = new CMSDK();
             try {
                 // 开始查询
-                Collection result = cmSDK.queryChaincode(initArgsQuery);
+                Collection result = cmSDK.queryChaincode("userInfo",initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = result.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -86,7 +86,7 @@ public class UserInfoDao implements JoinBeans, UpdateRedisChainCode {
      */
     public boolean insertUserInfo(UserInfo userInfo) {
         Slf4j.logger.info("Dao:用户注册或更新" + userInfo.toString());
-        CMSDK cmSDK = new CMSDK("userInfo");
+        CMSDK cmSDK = new CMSDK();
         String[] initArgsInvoke =
                 {userInfo.getUserId(),
                         "{\"userId\":\"" + userInfo.getUserId() + "\"," +
@@ -115,7 +115,7 @@ public class UserInfoDao implements JoinBeans, UpdateRedisChainCode {
             }
             updateRedisChainCode(userInfo);
         }).start();
-        return cmSDK.invoke(initArgsInvoke);
+        return cmSDK.invoke("userInfo",initArgsInvoke);
     }
 
     @Override

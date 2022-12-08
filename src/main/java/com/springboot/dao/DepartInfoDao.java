@@ -52,10 +52,10 @@ public class DepartInfoDao implements JoinBeans, UpdateRedisChainCode {
             // 添加向区块链请求的信息
             String[] initArgsQuery = {departId};
             // 创建fabricSDK对象
-            CMSDK cmSDK = new CMSDK("departInfo");
+            CMSDK cmSDK = new CMSDK();
             try {
                 // 开始查询
-                Collection result = cmSDK.queryChaincode(initArgsQuery);
+                Collection result = cmSDK.queryChaincode("departInfo",initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = result.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -83,7 +83,7 @@ public class DepartInfoDao implements JoinBeans, UpdateRedisChainCode {
      */
     public boolean insertDepartInfo(DepartInfo departInfo) {
         Slf4j.logger.info("Dao:添加或者更新部门信息" + departInfo.toString());
-        CMSDK cmSDK = new CMSDK("departInfo");
+        CMSDK cmSDK = new CMSDK();
         String[] initArgsInvoke =
                 {departInfo.getDepartId(),
                         "{\"departId\":\"" + departInfo.getDepartId() + "\"," +
@@ -109,7 +109,7 @@ public class DepartInfoDao implements JoinBeans, UpdateRedisChainCode {
             }
             updateRedisChainCode(departInfo);
         }).start();
-        return cmSDK.invoke(initArgsInvoke);
+        return cmSDK.invoke("departInfo",initArgsInvoke);
     }
 
     @Override

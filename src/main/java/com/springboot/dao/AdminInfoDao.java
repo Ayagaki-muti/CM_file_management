@@ -52,10 +52,10 @@ public class AdminInfoDao implements JoinBeans, UpdateRedisChainCode {
             // 添加向区块链请求的信息
             String[] initArgsQuery = {adminId};
             // 创建fabricSDK对象
-            CMSDK cmSDK = new CMSDK("adminInfo");
+            CMSDK cmSDK = new CMSDK();
             try {
                 // 开始查询
-                Collection result = cmSDK.queryChaincode(initArgsQuery);
+                Collection result = cmSDK.queryChaincode("adminInfo",initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = result.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -88,7 +88,7 @@ public class AdminInfoDao implements JoinBeans, UpdateRedisChainCode {
      */
     public boolean insertAdminInfo(AdminInfo adminInfo) {
         Slf4j.logger.info("Dao:管理员注册或更新" + adminInfo.toString());
-        CMSDK cmSDK = new CMSDK("adminInfo");
+        CMSDK cmSDK = new CMSDK();
         String[] initArgsInvoke =
                 {adminInfo.getAdminId(),
                         "{\"adminId\":\"" + adminInfo.getAdminId() + "\"," +
@@ -118,7 +118,7 @@ public class AdminInfoDao implements JoinBeans, UpdateRedisChainCode {
             }
             updateRedisChainCode(adminInfo);
         }).start();
-        return cmSDK.invoke(initArgsInvoke);
+        return cmSDK.invoke("adminInfo",initArgsInvoke);
     }
 
     @Override

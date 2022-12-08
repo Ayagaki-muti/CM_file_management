@@ -18,18 +18,15 @@ import java.util.*;
 import static com.springboot.utils.chainmakerSDK.StaticConfig.*;
 
 public class CMSDK {
-    private String contractName; //智能合约名字
-
     static ChainClient chainClient;
     static ChainManager chainManager;
 
+
     /**
      * 初始化长安链
-     * @param contractName 智能合约名称
      */
-    public CMSDK(String contractName) {
+    public CMSDK() {
         try {
-            this.contractName = contractName;
             SdkConfig sdkConfig;
             if(adminUser1 == null){
                 adminUser1 = new User(ORG_ID1, FileUtils.getResourceFileBytes(ADMIN1_KEY_PATH),
@@ -155,7 +152,7 @@ public class CMSDK {
      * @param initArgs 传参
      * @return
      */
-    public boolean invoke(String[] initArgs) {
+    public boolean invoke(String contractName, String[] initArgs) {
         try {
             Map<String,byte[]> param = new HashMap<>();
             for (String i :initArgs){
@@ -178,7 +175,7 @@ public class CMSDK {
      * @param initArgs 传参
      * @return
      */
-    public Collection queryChaincode(String[] initArgs) {
+    public Collection queryChaincode(String contractName, String[] initArgs) {
         try {
 
 
@@ -195,7 +192,7 @@ public class CMSDK {
      * @param initArgs 传参
      * @return
      */
-    public Collection queryAllChaincode(String[] initArgs){
+    public Collection queryAllChaincode(String contractName, String[] initArgs){
         try {
 
 

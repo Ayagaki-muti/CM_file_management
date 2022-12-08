@@ -55,9 +55,9 @@ public class RecordInfoDao implements JoinBeans, InsertToRedisHistory, UpdateRed
                 // 添加向区块链请求的信息
                 String[] initArgsQuery = {recordId};
                 // 创建fabricSDK对象
-                CMSDK cmSDK = new CMSDK("recordInfo");
+                CMSDK cmSDK = new CMSDK();
                 // 开始查询
-                Collection result = cmSDK.queryChaincode(initArgsQuery);
+                Collection result = cmSDK.queryChaincode("recordInfo",initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = result.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -99,10 +99,10 @@ public class RecordInfoDao implements JoinBeans, InsertToRedisHistory, UpdateRed
             // 添加向区块链请求的信息
             String[] initArgsQuery = {recordId};
             // 创建fabricSDK对象
-            CMSDK cmSDK = new CMSDK("recordInfo");
+            CMSDK cmSDK = new CMSDK();
             try {
                 // 开始查询
-                Collection collection = cmSDK.queryAllChaincode(initArgsQuery);
+                Collection collection = cmSDK.queryAllChaincode("recordInfo",initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = collection.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -140,7 +140,7 @@ public class RecordInfoDao implements JoinBeans, InsertToRedisHistory, UpdateRed
      */
     public boolean insertRecordInfo(RecordInfo recordInfo) {
         Slf4j.logger.info("Dao:添加档案信息" + recordInfo.toString());
-        CMSDK cmSDK = new CMSDK("recordInfo");
+        CMSDK cmSDK = new CMSDK();
         String[] initArgsInvoke =
                 {recordInfo.getRecordId(),
                         "{\"recordId\":\"" + recordInfo.getRecordId() + "\"," +
@@ -171,7 +171,7 @@ public class RecordInfoDao implements JoinBeans, InsertToRedisHistory, UpdateRed
                 e.printStackTrace();
             }
         }).start();
-        return cmSDK.invoke(initArgsInvoke);
+        return cmSDK.invoke("recordInfo",initArgsInvoke);
     }
 
 

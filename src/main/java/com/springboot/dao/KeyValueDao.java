@@ -42,10 +42,10 @@ public class KeyValueDao implements JoinBeans, InsertToRedisHistory {
             // 添加向区块链请求的信息
             String[] initArgsQuery = {key};
             // 创建fabricSDK对象
-            CMSDK cmSDK = new CMSDK("keyValue");
+            CMSDK cmSDK = new CMSDK();
             try {
                 // 开始查询
-                Collection collection = cmSDK.queryAllChaincode(initArgsQuery);
+                Collection collection = cmSDK.queryAllChaincode("keyValue",initArgsQuery);
                 // 利用Iterator遍历Collection对象获取密码
                 Iterator<String> it = collection.iterator();
                 // 应该是只返回一个  这个while用于返回多个的情况下
@@ -81,7 +81,7 @@ public class KeyValueDao implements JoinBeans, InsertToRedisHistory {
      */
     public boolean insertKeyIndex(KeyValue keyValue) {
         Slf4j.logger.info("Dao:添加KeyIndex信息" + keyValue.toString());
-        CMSDK cmSDK = new CMSDK("keyValue");
+        CMSDK cmSDK = new CMSDK();
         String[] initArgsInvoke =
                 {keyValue.getKey(),
                         "{\"Key\":\"" + keyValue.getKey() + "\"," +
@@ -98,7 +98,7 @@ public class KeyValueDao implements JoinBeans, InsertToRedisHistory {
                 e.printStackTrace();
             }
         }).start();
-        return cmSDK.invoke(initArgsInvoke);
+        return cmSDK.invoke("keyValue",initArgsInvoke);
     }
 
     /**
