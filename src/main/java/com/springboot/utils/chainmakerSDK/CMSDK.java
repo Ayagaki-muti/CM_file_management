@@ -10,18 +10,19 @@ import org.chainmaker.sdk.User;
 import org.chainmaker.sdk.config.NodeConfig;
 import org.chainmaker.sdk.config.SdkConfig;
 import org.chainmaker.sdk.utils.FileUtils;
+import org.chainmaker.sdk.utils.SdkUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
 import java.util.*;
 
+import static com.springboot.config.PathConf.chaincodeLocation;
 import static com.springboot.utils.chainmakerSDK.StaticConfig.*;
 
 public class CMSDK {
     static ChainClient chainClient;
     static ChainManager chainManager;
-
-
+    
     /**
      * 初始化长安链
      */
@@ -99,13 +100,21 @@ public class CMSDK {
      * @return
      */
     public static Object installChaincode(String chaincodeVersion, String chaincodeLocation, String contractName){
+        ResultOuterClass.TxResponse responseInfo = null;
         try {
-            //可以通过运行起来，grep来过滤
-            System.out.println("CM_Terminal_log:"+chaincodeLocation+"/"+contractName);
+            //1.读取指定位置的文件
             byte[] byteCode = FileUtils.getResourceFileBytes(chaincodeLocation+'/'+contractName);
+            //2.TODO:params不知道加什么
             Request.Payload payload = chainClient.createContractCreatePayload(contractName, "1", byteCode,
                     ContractOuterClass.RuntimeType.DOCKER_GO, null);
-
+            //3.使用多个支持者来创建合约
+            Request.EndorsementEntry[] endorsementEntries = SdkUtils.getEndorsers(payload, new User[]{adminUser1, adminUser2, adminUser3,adminUser4});
+            //4.发送请求(我把超时时间设置为官方推荐的10000的十倍)
+            responseInfo = chainClient.sendContractManageRequest(payload, endorsementEntries, 100000, 100000);
+            //5.
+            if (responseInfo == null){
+                return "合约安装失败";
+            }
         }catch (Exception e){
             e.printStackTrace();
             return e.toString();
@@ -120,14 +129,8 @@ public class CMSDK {
      * @return
      */
     public static Object instantiated(String contractName, String chaincodeVersion) {
-        try {
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-            return e.toString();
-        }
-        return null;
+        //TODO:我感觉长安链不需要实例化,所以直接返回ok就行了大概
+        return "init sucess";
     }
 
     /**
@@ -137,9 +140,20 @@ public class CMSDK {
      * @return
      */
     public static Object upgradeChaincode(String contractName, String chaincodeVersion) {
+        ResultOuterClass.TxResponse responseInfo = null;
         try {
+        //TODO:这个系统目前好像并不会升级合约,应该只有更新一下版本,但实际的合约内容没有输入
+            byte[] byteCode = FileUtils.getResourceFileBytes(chaincodeLocation+'/'+contractName);
+            Request.Payload payload = chainClient.createContractUpgradePayload(contractName,chaincodeVersion,byteCode,
+                                                                    ContractOuterClass.RuntimeType.DOCKER_GO, null);
+            //3.使用多个支持者来支持升级合约
+            Request.EndorsementEntry[] endorsementEntries = SdkUtils.getEndorsers(payload, new User[]{adminUser1, adminUser2, adminUser3,adminUser4});
+            //4.发送请求(我把超时时间设置为官方推荐的10000的十倍)
+            responseInfo = chainClient.sendContractManageRequest(payload, endorsementEntries, 100000, 100000);
 
-
+            if (responseInfo == null){
+                return "合约升级失败";
+            }
         }catch (Exception e){
             e.printStackTrace();
             return e.toString();
@@ -153,16 +167,25 @@ public class CMSDK {
      * @return
      */
     public boolean invoke(String contractName, String[] initArgs) {
+        ResultOuterClass.TxResponse responseInfo = null;
         try {
             Map<String,byte[]> param = new HashMap<>();
             for (String i :initArgs){
                 param.put("",i.getBytes());         //TODO:不知道参数写啥
             }
-            ResultOuterClass.TxResponse responseInfo = null;
-            responseInfo = chainClient.invokeContract(contractName,"save" ,
-                    null, param,10000, 10000);
-            System.out.println("CM_Terminal_log:"+responseInfo);
-
+            responseInfo = chainClient.invokeContract(contractName,"xxxxxx" ,
+                    null, param,100000, 100000);
+            //TODO:判断responseInfo中的信息,看它是不是成功了
+            //System.out.println("CM_Terminal_log:"+responseInfo);
+            //原本程序中:
+//            if (response.getStatus().getStatus() == 200) {
+//                log.info("{} invoke proposal {} sucess", response.getPeer().getName(), funcName);
+//                result = "{" + response.getPeer().getName() + "} invoke proposal {" + funcName + "} sucess";
+//            } else {
+//                String[] logArgs = {response.getMessage(), funcName, response.getPeer().getName()};
+//                log.error("{} invoke proposal {} fail on {}", logArgs);
+//                result = "{" + logArgs[0] + "} invoke proposal {" + logArgs[1] + "} fail on {" + logArgs[2] + "}";
+//            }
         }catch (Exception e){
             e.printStackTrace();
             return false;
@@ -176,10 +199,20 @@ public class CMSDK {
      * @return
      */
     public Collection queryChaincode(String contractName, String[] initArgs) {
-        try {
+        ResultOuterClass.TxResponse responseInfo = null;
 
+        try {
+            Map<String,byte[]> param = new HashMap<>();
+            for (String i :initArgs){
+                param.put("",i.getBytes());         //TODO:不知道参数写啥
+            }
+            //TODO:method-QUERY_CONTRACT_METHOD需要替换,参数也需要修改
+            responseInfo = chainClient.queryContract(contractName, "QUERY_CONTRACT_METHOD",
+                    null,  param,100000);
 
             Map map = null;
+            //TODO:在map中放入responseInfo中获取到的数据
+
             return map.values();
         }catch (Exception e){
             e.printStackTrace();
@@ -193,11 +226,21 @@ public class CMSDK {
      * @return
      */
     public Collection queryAllChaincode(String contractName, String[] initArgs){
+        ResultOuterClass.TxResponse responseInfo = null;
+
         try {
+            Map<String,byte[]> param = new HashMap<>();
+            for (String i :initArgs){
+                param.put("",i.getBytes());         //TODO:不知道参数写啥
+            }
+            //TODO:method-QUERY_ALL_CONTRACT_METHOD需要替换,参数也需要修改
+            responseInfo = chainClient.queryContract(contractName, "QUERY_ALL_CONTRACT_METHOD",
+                    null,  param,10000);
 
+            Map result_map = null;
+            //TODO:在map中放入responseInfo中获取到的数据
 
-            Map map = null;
-            return map.values();
+            return result_map.values();
         }catch (Exception e){
             e.printStackTrace();
             return null;
