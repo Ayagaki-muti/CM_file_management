@@ -142,8 +142,9 @@ public class CMSDK {
     public static Object upgradeChaincode(String contractName, String chaincodeVersion) {
         ResultOuterClass.TxResponse responseInfo = null;
         try {
-        //TODO:这个系统目前好像并不会升级合约,应该只有更新一下版本,但实际的合约内容没有输入
+            //TODO:这个系统目前好像并不会升级合约,应该只有更新一下版本,但实际的合约内容没有输入
             byte[] byteCode = FileUtils.getResourceFileBytes(chaincodeLocation+'/'+contractName);
+            //2.TODO:params不知道加什么,不知道要不要加原本的参数
             Request.Payload payload = chainClient.createContractUpgradePayload(contractName,chaincodeVersion,byteCode,
                                                                     ContractOuterClass.RuntimeType.DOCKER_GO, null);
             //3.使用多个支持者来支持升级合约
@@ -176,6 +177,7 @@ public class CMSDK {
             responseInfo = chainClient.invokeContract(contractName,"xxxxxx" ,
                     null, param,100000, 100000);
             //TODO:判断responseInfo中的信息,看它是不是成功了
+            //TODO:看看输出的格式是不是必须得这样标准的格式result = "{" + response.getPeer().getName() + "} invoke proposal {" + funcName + "} sucess";
             //System.out.println("CM_Terminal_log:"+responseInfo);
             //原本程序中:
 //            if (response.getStatus().getStatus() == 200) {
