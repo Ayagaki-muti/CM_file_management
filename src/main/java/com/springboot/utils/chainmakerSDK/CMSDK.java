@@ -47,12 +47,7 @@ public class CMSDK {
                         FileUtils.getResourceFileBytes(ADMIN3_TLS_KEY_PATH),
                         FileUtils.getResourceFileBytes(ADMIN3_TLS_CERT_PATH));
             }
-            if(adminUser4 == null){
-                adminUser4 = new User(ORG_ID4, FileUtils.getResourceFileBytes(ADMIN4_KEY_PATH),
-                        FileUtils.getResourceFileBytes(ADMIN4_CERT_PATH),
-                        FileUtils.getResourceFileBytes(ADMIN4_TLS_KEY_PATH),
-                        FileUtils.getResourceFileBytes(ADMIN4_TLS_CERT_PATH));
-            }
+
             if(chainManager == null){
                 Yaml yaml = new Yaml();
                 InputStream in = ididi.class.getClassLoader().getResourceAsStream(SDK_CONFIG_PATH);
