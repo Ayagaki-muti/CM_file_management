@@ -1,5 +1,8 @@
 package com.springboot;
 
+import org.chainmaker.pb.common.ContractOuterClass;
+import org.chainmaker.pb.common.Request;
+import org.chainmaker.pb.common.ResultOuterClass;
 import org.chainmaker.pb.config.ChainConfigOuterClass;
 import org.chainmaker.sdk.ChainClient;
 import org.chainmaker.sdk.ChainManager;
@@ -7,12 +10,10 @@ import org.chainmaker.sdk.User;
 import org.chainmaker.sdk.config.NodeConfig;
 import org.chainmaker.sdk.config.SdkConfig;
 import org.chainmaker.sdk.utils.FileUtils;
+import org.chainmaker.sdk.utils.SdkUtils;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,13 +40,13 @@ public class ididi {
     static final String ORG_ID3 = "TestCMorg3";
 
     static String SDK_CONFIG = "crypto-config/sdk_config.yml";
+    private static final String CONTRACT_FILE_PATH = "rust.wasm";
 
     static ChainClient chainClient;
     static ChainManager chainManager;
     static User adminUser1;
     static User adminUser2;
     static User adminUser3;
-    static User adminUser4;
 
     public static void main(String[] args) throws Exception{
         Yaml yaml = new Yaml();
@@ -100,5 +101,20 @@ public class ididi {
             e.printStackTrace();
         }
         System.out.println(chainConfig.toString());
+
+        byte[] byteCode = FileUtils.getResourceFileBytes(CONTRACT_FILE_PATH);
+
+        Request.Payload payload = chainClient.createContractCreatePayload("rustfact", "1", byteCode,
+                ContractOuterClass.RuntimeType.WASMER, null);
+        //3.使用多个支持者来创建合约
+        Request.EndorsementEntry[] endorsementEntries = SdkUtils.getEndorsers(payload, new User[]{adminUser1, adminUser2, adminUser3});
+        //4.发送请求(我把超时时间设置为官方推荐的10000的十倍)
+        ResultOuterClass.TxResponse responseInfo = null;
+        responseInfo = chainClient.sendContractManageRequest(payload, endorsementEntries, 10000, 10000);
+
+        if (responseInfo == null){
+            System.out.println("合约安装失败");
+        }
+
     }
 }

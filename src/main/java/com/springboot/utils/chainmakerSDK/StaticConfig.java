@@ -26,5 +26,4 @@ public class StaticConfig {
     static User adminUser1;
     static User adminUser2;
     static User adminUser3;
-    static User adminUser4;
 }

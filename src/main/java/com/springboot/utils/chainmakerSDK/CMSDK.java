@@ -14,6 +14,7 @@ import org.chainmaker.sdk.utils.SdkUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static com.springboot.config.PathConf.chaincodeLocation;
@@ -98,14 +99,19 @@ public class CMSDK {
         ResultOuterClass.TxResponse responseInfo = null;
         try {
             //1.读取指定位置的文件
-            byte[] byteCode = FileUtils.getResourceFileBytes(chaincodeLocation+'/'+contractName);
-            //2.TODO:params不知道加什么
+            byte[] byteCode = FileUtils.getResourceFileBytes(chaincodeLocation+'/'+contractName+".7z");
+            //2.TODO:params不知道加什么，chaincodeVersion变成数字
+
+            HashMap<String,byte[]> params_map = new HashMap<>();
+           // params_map.put("save","".getBytes());
+            //params_map.put("query","".getBytes());
+
             Request.Payload payload = chainClient.createContractCreatePayload(contractName, "1", byteCode,
                     ContractOuterClass.RuntimeType.DOCKER_GO, null);
             //3.使用多个支持者来创建合约
-            Request.EndorsementEntry[] endorsementEntries = SdkUtils.getEndorsers(payload, new User[]{adminUser1, adminUser2, adminUser3,adminUser4});
+            Request.EndorsementEntry[] endorsementEntries = SdkUtils.getEndorsers(payload, new User[]{adminUser1, adminUser2, adminUser3});
             //4.发送请求(我把超时时间设置为官方推荐的10000的十倍)
-            responseInfo = chainClient.sendContractManageRequest(payload, endorsementEntries, 100000, 100000);
+            responseInfo = chainClient.sendContractManageRequest(payload, endorsementEntries, 10000, 10000);
             //5.
             if (responseInfo == null){
                 return "合约安装失败";
@@ -143,7 +149,7 @@ public class CMSDK {
             Request.Payload payload = chainClient.createContractUpgradePayload(contractName,chaincodeVersion,byteCode,
                                                                     ContractOuterClass.RuntimeType.DOCKER_GO, null);
             //3.使用多个支持者来支持升级合约
-            Request.EndorsementEntry[] endorsementEntries = SdkUtils.getEndorsers(payload, new User[]{adminUser1, adminUser2, adminUser3,adminUser4});
+            Request.EndorsementEntry[] endorsementEntries = SdkUtils.getEndorsers(payload, new User[]{adminUser1, adminUser2, adminUser3});
             //4.发送请求(我把超时时间设置为官方推荐的10000的十倍)
             responseInfo = chainClient.sendContractManageRequest(payload, endorsementEntries, 100000, 100000);
 
@@ -166,10 +172,11 @@ public class CMSDK {
         ResultOuterClass.TxResponse responseInfo = null;
         try {
             Map<String,byte[]> param = new HashMap<>();
-            for (String i :initArgs){
-                param.put("",i.getBytes());         //TODO:不知道参数写啥
-            }
-            responseInfo = chainClient.invokeContract(contractName,"xxxxxx" ,
+
+            param.put("one",initArgs[0].getBytes());        //索引
+            param.put("two",initArgs[1].getBytes());        //值
+
+            responseInfo = chainClient.invokeContract(contractName,"save" ,
                     null, param,100000, 100000);
             //TODO:判断responseInfo中的信息,看它是不是成功了
             //TODO:看看输出的格式是不是必须得这样标准的格式result = "{" + response.getPeer().getName() + "} invoke proposal {" + funcName + "} sucess";
